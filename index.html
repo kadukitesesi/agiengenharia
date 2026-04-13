@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agi Engenharia</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body id="top">
+    <header class="header">
+                <nav class="header__nav">
+                        <div class="header__inner">
+                            <a href="#top" class="header__logo-link"><img src="./assets/agi_logo.png" alt="logo da Agi engenharia"></a>
+                            <ul class="header__list">
+                <li class="header__item hidden-mobile">
+                    <a href="#sobre-nos" class="header__link">Sobre Nós</a>
+                </li>
+                <li class="header__item hidden-mobile">
+                    <a href="#servicos" class="header__link">Serviços</a>
+                </li>
+                <li class="header__item hidden-mobile">
+                    <a href="#portfolio" class="header__link">Portifólio</a>
+                </li>
+                <li class="header__item hidden-mobile">
+                    <a href="#contato" class="header__link">Contato</a>
+                </li>
+              </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <section class="hero">
+        </section>
+
+        <div class="info-box-wrap">
+            <div class="info-box">
+                <div class="info-box__item">
+                    <img src="./assets/construction.svg" alt="obra" class="info-box__icon">
+                    <p class="info-box__text">Especialistas em Obras Industriais e Franquias</p>
+                </div>
+                <div class="info-box__item">
+                    <img src="./assets/time.svg" alt="tempo" class="info-box__icon">
+                    <p class="info-box__text">Execução Rápida com Qualidade Garantida</p>
+                </div>
+                <div class="info-box__item">
+                    <img src="./assets/calendar.svg" alt="cronograma" class="info-box__icon">
+                    <p class="info-box__text">Compromisso Absoluto com o seu Cronograma</p>
+                </div>
+                <div class="info-box__item">
+                    <img src="./assets/strategy.svg" alt="estratégia" class="info-box__icon">
+                    <p class="info-box__text">Engenharia Estratégica para Grandes Marcas</p>
+                </div>
+            </div>
+        </div>
+
+        <section class="sobre-nos" id="sobre-nos">
+            <div class="sobre-nos__container">
+                <header class="sobre-nos__header">
+                    <h2 class="sobre-nos__title">Sobre nós</h2>
+                </header>
+
+                <div class="sobre-nos__intro">
+                    <h3 class="sobre-nos__subtitle">A solidez que sustenta o seu projeto.</h3>
+                    <p class="sobre-nos__paragraph">
+                        A AGI Engenharia não apenas executa obras; nós construímos parcerias de longo prazo. Nossa trajetória é traduzida pela confiabilidade conquistada no mercado através de um atendimento profundamente personalizado.
+                        O cuidado que dedicamos a cada etapa do processo cria uma conexão única, transparente e sólida entre nós e nossos clientes.
+                    </p>
+                </div>
+
+                <div class="sobre-nos__cards-row">
+                    <article class="card card--mission">
+                        <h4 class="card__title">missão</h4>
+                        <p class="card__text">Entregar soluções de engenharia com precisão técnica e rigor absoluto nos prazos. Transformamos projetos complexos em estruturas sólidas, otimizando recursos e impulsionando a expansão dos negócios de nossos clientes.</p>
+                    </article>
+
+                    <article class="card card--vision">
+                        <h4 class="card__title">visão</h4>
+                        <p class="card__text">Ser a parceira estratégica definitiva em engenharia para grandes marcas no Brasil, reconhecida pela excelência construtiva e pela agilidade na execução de obras de alto padrão.</p>
+                    </article>
+                </div>
+
+                <div class="sobre-nos__map-stats">
+                    <div class="sobre-nos__map">
+                        <img src="./assets/mapa_brasil.svg" alt="Mapa do Brasil" class="sobre-nos__map-image">
+                    </div>
+
+                    <aside class="sobre-nos__stats">
+                        <div class="sobre-nos__stat">
+                            <span class="sobre-nos__stat-number">24</span>
+                            <span class="sobre-nos__stat-label">anos de mercado</span>
+                        </div>
+                        <div class="sobre-nos__stat">
+                            <span class="sobre-nos__stat-number">+9</span>
+                            <span class="sobre-nos__stat-label">estados</span>
+                        </div>
+                        <div class="sobre-nos__stat">
+                            <span class="sobre-nos__stat-number">+38.000 m²</span>
+                            <span class="sobre-nos__stat-label">de projetos entregues</span>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+        <hr class="divisor">
+
+        <section class="servicos" id="servicos">
+            <div class="servicos__container">
+                <p class="servicos__kicker">SERVIÇOS</p>
+                <h3 class="servicos__title">SOLUÇÕES COMPLETAS EM ENGENHARIA E CONSTRUÇÃO</h3>
+                <p class="servicos__lead">Dominamos cada etapa do processo construtivo, desde a concepção até o mais minucioso detalhe final. Garantimos o uso de suprimentos de altíssima qualidade e mão de obra qualificada para resultados de excelência.</p>
+
+                <div class="servicos__content">
+                    <!-- Desktop gallery (visible on desktop) -->
+                    <div class="servicos__gallery servicos__gallery--desktop">
+                        <div class="servicos__thumb servicos__thumb--narrow"><img src="./assets/servicos_industriais.jpg" alt="serviço 1"></div>
+                        <div class="servicos__thumb servicos__thumb--narrow"><img src="./assets/servicos_shopping.jpg" alt="serviço 2"></div>
+                        <div class="servicos__thumb servicos__thumb--narrow"><img src="./assets/servicos_fastfood.png" alt="serviço 3"></div>
+                        <div class="servicos__thumb servicos__thumb--large"><img src="./assets/servicos_engenharia.png" alt="serviço 4"></div>
+                    </div>
+
+                    <!-- Mobile slider (visible on mobile) -->
+                    <div class="servicos__gallery--mobile" aria-roledescription="carousel">
+                        <div class="servicos__gallery-track">
+                                <div class="servicos__slide" data-title="Projetos de Engenharia em Geral" data-text="Planejamento estratégico completo. Oferecemos as melhores soluções técnicas para viabilizar e otimizar o seu empreendimento antes mesmo dele sair do papel." aria-hidden="false">
+                                    <img src="./assets/servicos_engenharia.png" alt="serviço 4">
+                                </div>
+                                <div class="servicos__slide" data-title="PROJETOS INDUSTRIAIS" data-text="Projetos industriais completos, desde estudo até entrega." aria-hidden="true">
+                                    <img src="./assets/servicos_industriais.jpg" alt="serviço 1">
+                                </div>
+                                <div class="servicos__slide" data-title="LOJAS E SHOPPINGS" data-text="Experiência em obras comerciais e shopping centers." aria-hidden="true">
+                                    <img src="./assets/servicos_shopping.jpg" alt="serviço 2">
+                                </div>
+                                <div class="servicos__slide" data-title="FASTFOOD" data-text="Projetos e obras para redes de alimentação rápida." aria-hidden="true">
+                                    <img src="./assets/servicos_fastfood.png" alt="serviço 3">
+                                </div>
+                        </div>
+                    </div>
+
+                    <aside class="servicos__aside">
+                        <h4 class="servicos__aside-title">ENGENHARIA ESTRATÉGICA</h4>
+                        <p class="servicos__aside-text">Planejamento estratégico completo. Oferecemos as melhores soluções técnicas para viabilizar e otimizar o seu empreendimento antes mesmo dele sair do papel.</p>
+                    </aside>
+                </div>
+            </div>
+        </section>
+        <hr class="divisor">
+        <section class="portfolio" id="portfolio">
+            <div class="portfolio__container">
+                <div class="portfolio__header">
+                    <h2 class="sobre-nos__title">NOSSO PORTIFÓLIO</h2>
+
+                    <!-- portfolio action buttons (two separate buttons) -->
+                    <div class="portfolio__actions" role="tablist" aria-label="Ações do portfólio">
+                        <button class="portfolio__btn portfolio__btn--country" data-key="pt" data-short="Portugal" data-full="Nossos trabalhos em Portugal" aria-pressed="false">
+                            <img src="./assets/portugal_flag.svg" alt="Portugal" class="portfolio__flag">
+                            <span class="portfolio__btn-text">Portugal</span>
+                        </button>
+                        <button class="portfolio__btn portfolio__btn--country portfolio__btn--selected" data-key="br" data-short="Brasil" data-full="Nossos trabalhos no Brasil" aria-pressed="true">
+                            <img src="./assets/flag_brasil.svg" alt="Brasil" class="portfolio__flag">
+                            <span class="portfolio__btn-text">Nossos trabalhos no Brasil</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="carousel" aria-roledescription="carousel">
+                <button class="carousel__nav carousel__nav--left" aria-label="Anterior">
+                    <img src="./assets/right_arrow.svg" alt="anterior">
+                </button>
+
+                <div class="carousel__stage">
+                    <div class="carousel__track">
+                        <article class="carousel__slide">
+                            <img src="./assets/tuvsud.png" alt="TÜV SÜD SFDK brasil">
+                            <div class="carousel__caption">TÜV SÜD SFDK BRASIL</div>
+                        </article>
+                        <article class="carousel__slide">
+                            <img src="./assets/itambe.png" alt="ITAMBÉ, PARÁ DE MINAS– MG">
+                            <div class="carousel__caption">ITAMBÉ, PARÁ DE MINAS– MG</div>
+                        </article>
+                        <article class="carousel__slide">
+                            <img src="./assets/minasshopping.png" alt="MINAS SHOPPING">
+                            <div class="carousel__caption">MINAS SHOPPING</div>
+                        </article>
+                        <article class="carousel__slide">
+                            <img src="./assets/pizzahutbeto.jpg" alt="PIZZA HUT BETO CARRERO">
+                            <div class="carousel__caption">PIZZA HUT BETO CARRERO</div>
+                        </article>
+                        <article class="carousel__slide">
+                            <img src="./assets/catuai.png" alt="KFC CATUAÍ - PR">
+                            <div class="carousel__caption">KFC CATUAÍ - PR</div>
+                        </article>
+                        <article class="carousel__slide">
+                            <img src="./assets/wizard.png" alt="WIZARD CENTRO, CURITIBA">
+                            <div class="carousel__caption">WIZARD CENTRO, CURITIBA</div>
+                        </article>
+                        <article class="carousel__slide">
+                            <img src="./assets/ademicon.png" alt="Ademicon">
+                            <div class="carousel__caption">ADEMICON</div>
+                        </article>
+                        <article class="carousel__slide">
+                            <img src="./assets/klabin.png" alt="Klabin">
+                            <div class="carousel__caption">KLABIN</div>
+                        </article>
+                    </div>
+                </div>
+
+                <button class="carousel__nav carousel__nav--right" aria-label="Próximo">
+                    <img src="./assets/left_arrow.svg" alt="próximo">
+                </button>
+
+                <div class="carousel__indicators" aria-hidden="false"></div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="partners">
+            <div class="partners__container">
+                <h3 class="partners__heading">Grandes marcas constroem com a AGI&nbsp;Engenharia.</h3>
+                <div class="partners__marquee" aria-hidden="false">
+                    <div class="partners__track">
+                        <div class="partners__item"><img src="./assets/logo_tuvsud.svg" alt="TÜV SÜD"></div>
+                        <div class="partners__item"><img src="./assets/logo_grudado.svg" alt="Grudado"></div>
+                        <div class="partners__item"><img src="./assets/logo_kfc.svg" alt="KFC"></div>
+                        <div class="partners__item"><img src="./assets/logo_wizard.png" alt="Wizard"></div>
+                        <div class="partners__item"><img src="./assets/logo_beto.png" alt="Beto Carrero"></div>
+                        <div class="partners__item"><img src="./assets/logo_klabin.svg" alt="Klabin"></div>
+                        <div class="partners__item"><img src="./assets/logo_minassh.png" alt="Minas Shopping"></div>
+                        <div class="partners__item"><img src="./assets/logo_paguemenos.svg" alt="Pague Menos"></div>
+                        <div class="partners__item"><img src="./assets/logo_ademicon.svg" alt="Ademicon"></div>
+                        <div class="partners__item"><img src="./assets/logo_pizza_hut.svg" alt="Pizza Hut"></div>
+                        <div class="partners__item"><img src="./assets/logo_itambe.png" alt="Itambé"></div>
+                        <div class="partners__item"><img src="./assets/logo_lactalis.png" alt="Lactalis"></div>
+                        <!-- duplicated set for seamless loop -->
+                        <div class="partners__item"><img src="./assets/logo_tuvsud.svg" alt="TÜV SÜD"></div>
+                        <div class="partners__item"><img src="./assets/logo_grudado.svg" alt="Grudado"></div>
+                        <div class="partners__item"><img src="./assets/logo_kfc.svg" alt="KFC"></div>
+                        <div class="partners__item"><img src="./assets/logo_wizard.png" alt="Wizard"></div>
+                        <div class="partners__item"><img src="./assets/logo_beto.png" alt="Beto Carrero"></div>
+                        <div class="partners__item"><img src="./assets/logo_klabin.svg" alt="Klabin"></div>
+                        <div class="partners__item"><img src="./assets/logo_minassh.png" alt="Minas Shopping"></div>
+                        <div class="partners__item"><img src="./assets/logo_paguemenos.svg" alt="Pague Menos"></div>
+                        <div class="partners__item"><img src="./assets/logo_ademicon.svg" alt="Ademicon"></div>
+                        <div class="partners__item"><img src="./assets/logo_pizza_hut.svg" alt="Pizza Hut"></div>
+                        <div class="partners__item"><img src="./assets/logo_itambe.png" alt="Itambé"></div>
+                        <div class="partners__item"><img src="./assets/logo_lactalis.png" alt="Lactalis"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <hr class="divisor">
+        <section class="cta" id="contato">
+            <div class="cta__container">
+                <div class="cta__left">
+                        <div class="cta__heading">
+                            <p class="cta__kicker">CONSTRUINDO O FUTURO</p>
+                            <h3 class="cta__title">REALIZE SEU PROJETO COM<br>EXCELÊNCIA EM ENGENHARIA</h3>
+                        </div>
+                    <p class="cta__lead">Preencha o formulário e receba um orçamento personalizado. Nossa equipe de engenheiros está pronta para transformar seus planos em realidade.</p>
+
+                    <ul class="cta__benefits">
+                        <li><img src="./assets/check.svg" alt="check" class="cta__check"><div><strong>Projetos personalizados</strong><span>Soluções sob medida para cada necessidade</span></div></li>
+                        <li><img src="./assets/check.svg" alt="check" class="cta__check"><div><strong>Mais de 20 anos de experiência</strong><span>Centenas de obras entregues com qualidade</span></div></li>
+                        <li><img src="./assets/check.svg" alt="check" class="cta__check"><div><strong>Orçamento sem compromisso</strong><span>Avaliação gratuita do seu projeto</span></div></li>
+                    </ul>
+                </div>
+
+                <form class="cta__form" action="#" method="post" novalidate>
+                    <h4 class="cta__form-title">Comece agora</h4>
+                    <p class="cta__form-lead">Preencha seus dados e entraremos em contato</p>
+
+                    <label class="cta__label">Nome completo *</label>
+                    <input class="cta__input" type="text" name="name" placeholder="João Silva" required>
+
+                    <div class="cta__row">
+                        <div class="cta__col">
+                            <label class="cta__label">E-mail *</label>
+                            <input class="cta__input" type="email" name="email" placeholder="seu@email.com" required>
+                        </div>
+                        <div class="cta__col">
+                            <label class="cta__label">Telefone *</label>
+                            <input class="cta__input" type="tel" name="phone" placeholder="(11) 99999-9999" required>
+                        </div>
+                    </div>
+
+                    <label class="cta__label">Empresa / Projeto</label>
+                    <input class="cta__input" type="text" name="company" placeholder="Nome da empresa ou projeto">
+
+                    <label class="cta__label">Tipo de serviço *</label>
+                    <select class="cta__input" name="service" required>
+                        <option value="">Selecione uma opção</option>
+                        <option>Projetos</option>
+                        <option>Construção</option>
+                        <option>Reformas</option>
+                    </select>
+
+                    <button class="cta__btn" type="submit">QUERO RECEBER CONTATO</button>
+                </form>
+            </div>
+        </section>
+
+
+    </main>
+    <footer class="site-footer">
+        <div class="site-footer__container">
+            <div class="site-footer__col site-footer__brand">
+                <img src="./assets/agi_logo_footer.png" alt="AGI" class="footer__logo">
+                <p class="footer__desc">A AGI Engenharia é uma empresa dedicada a transformar os projetos de nossos clientes em realidade, utilizando o que há de mais inovador no setor da construção civil.</p>
+            </div>
+
+            <div class="site-footer__col site-footer__menu">
+                <h4>Menu</h4>
+                <ul>
+                    <li><a href="#sobre-nos">Sobre nós</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#portfolio">Nossos trabalhos</a></li>
+                    <li><a href="#contato">Contatos</a></li>
+                </ul>
+            </div>
+
+            <div class="site-footer__col site-footer__contatos">
+                <h4>Contatos</h4>
+                <ul class="footer__contacts">
+                    <li><img src="./assets/map_icon.svg" alt="map" class="footer__icon"> Av. João César de Oliveira, 6642 - Beatriz</li>
+                    <li><img src="./assets/whatsapp_icon.svg" alt="whatsapp" class="footer__icon"> 55 31 99208 0054</li>
+                    <li><img src="./assets/telefone_icon.svg" alt="telefone" class="footer__icon"> 31 3353-0187</li>
+                </ul>
+            </div>
+
+            <div class="site-footer__col site-footer__social">
+                <h4>Social</h4>
+                <div class="footer__social-icons">
+                    <img src="./assets/insta_icon.svg" alt="instagram">
+                    <img src="./assets/facebook_icon.svg" alt="facebook">
+                    <img src="./assets/linkedin_icon.svg" alt="linkedin">
+                    <img src="./assets/mail_icon.svg" alt="mail">
+                </div>
+                <hr class="site-footer__sep">
+            </div>
+        </div>
+
+        <div class="site-footer__bottom">
+            <div class="site-footer__bottom-inner site-footer__bottom-inner--center">
+                <p>© Agi Engenharia 2026 - Reload Estudos - Desenvolvimento e Comunicação</p>
+                <img src="./assets/reload_icon.svg" alt="reload" class="footer__reload">
+            </div>
+        </div>
+    </footer>
+    <!-- WhatsApp floating button -->
+    <a href="https://wa.me/5531992080054?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Abrir WhatsApp para solicitar orçamento">
+        <img src="./assets/botao_whatsapp.png" alt="WhatsApp">
+    </a>
+
+    <script>
+        (function(){
+            console.log('[loader] injecting script.js');
+            var s = document.createElement('script');
+            s.src = './script.js';
+            s.onload = function(){ console.log('[loader] script.js loaded'); };
+            s.onerror = function(e){ console.error('[loader] script.js failed to load', e); };
+            document.head.appendChild(s);
+        })();
+    </script>
+    <script>
+    (function(){
+        function animateCounters(container){
+            const counters = container.querySelectorAll('.sobre-nos__stat-number');
+            if (!counters.length) return;
+
+            counters.forEach(el => {
+                const original = (el.textContent || '').trim();
+                const hasPlus = original.indexOf('+') !== -1;
+                const digits = original.replace(/[^\d]/g, '');
+                const target = parseInt(digits, 10) || 0;
+                const suffix = original.replace(/[\d\+\.\,\s]/g, '');
+                const duration = 1600; // ms
+
+                let start = null;
+                function step(timestamp){
+                    if (!start) start = timestamp;
+                    const progress = Math.min((timestamp - start) / duration, 1);
+                    const value = Math.floor(progress * target);
+                    el.textContent = (hasPlus ? '+' : '') + value.toLocaleString('pt-BR') + (suffix ? ' ' + suffix : '');
+                    if (progress < 1) requestAnimationFrame(step);
+                    else el.textContent = (hasPlus ? '+' : '') + target.toLocaleString('pt-BR') + (suffix ? ' ' + suffix : '');
+                }
+
+                requestAnimationFrame(step);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function(){
+            const target = document.querySelector('.sobre-nos__stats') || document.querySelector('.sobre-nos');
+            if (!target) return;
+
+            let started = false;
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !started) {
+                        started = true;
+                        animateCounters(entry.target);
+                        obs.disconnect();
+                    }
+                });
+            }, {threshold: 0.4});
+
+            observer.observe(target);
+        });
+    })();
+    </script>
+</body>
+</html>
