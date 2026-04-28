@@ -1219,6 +1219,24 @@ body {
   }
 
   .servicos__kicker { font-size: 10px; }
+  /* Hide overflowing parts of adjacent slides */
+  .carousel__stage {
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* normalize track gap so transforms match visual layout */
+  .carousel__track {
+    gap: 0;
+  }
+
+  /* ensure images fit their slide and don't overflow */
+  .carousel__slide img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
   .servicos__title { font-size: 15px; font-weight: 700; }
   .servicos__lead { font-size: 9px; line-height: 1.4; }
 

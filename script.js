@@ -218,13 +218,29 @@
 							const isMobile = window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
 							const autoplayDelay = 4000; // ms
 
-							let _gap = 12;
+							let _gap = 0; // assume no visual gap between slides unless CSS defines one
 							function getSlideWidth(){
 								if (!slides.length) return carousel.clientWidth;
-								try { const cs = window.getComputedStyle(track); _gap = parseFloat(cs.gap) || parseFloat(cs.columnGap) || _gap; } catch(e) { /* ignore */ }
-								const w = slides[0].offsetWidth || slides[0].clientWidth || carousel.clientWidth;
+								try {
+									const cs = window.getComputedStyle(track);
+									_gap = parseFloat(cs.gap) || parseFloat(cs.columnGap) || 0;
+								} catch(e) { /* ignore */ }
+								// Use the visible stage width so transforms align with the viewport of the carousel
+								const stageEl = carousel.querySelector('.carousel__stage') || carousel;
+								const w = stageEl.clientWidth || carousel.clientWidth || (slides[0].offsetWidth || slides[0].clientWidth);
 								return w + (_gap || 0);
 							}
+
+							// On mobile we want every slide to exactly match the visible stage width
+							function applyMobileSlideWidths(){
+								if (!isMobile) return;
+								const stageEl = carousel.querySelector('.carousel__stage') || carousel;
+								const w = stageEl.clientWidth || carousel.clientWidth;
+								slides.forEach(s => { try { s.style.width = w + 'px'; } catch(e){} });
+							}
+
+							// ensure widths are applied initially and after resizes
+							applyMobileSlideWidths();
 
 							function update(){
 								const slideW = getSlideWidth();
@@ -270,8 +286,31 @@
 							let startX = 0, moving = false;
 							if (track){
 								track.addEventListener('touchstart', e=>{ if (e.touches.length!==1) return; startX = e.touches[0].clientX; moving = true; track.style.transition = 'none'; stopAutoplay(); }, {passive:false});
-								track.addEventListener('touchmove', e=>{ if (!moving) return; const dx = e.touches[0].clientX - startX; const slideW = getSlideWidth(); track.style.transform = `translate3d(${ -idx * slideW + dx }px,0,0)`; }, {passive:false});
-								track.addEventListener('touchend', e=>{ if (!moving) return; moving = false; const dx = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX - startX : 0; const slideW = getSlideWidth(); const threshold = slideW / 6; if (dx < -threshold && idx < slides.length-1) idx++; else if (dx > threshold && idx > 0) idx--; update(); setTimeout(()=>{ if (isMobile) startAutoplay(); }, 600); });
+								track.addEventListener('touchmove', e=>{
+									if (!moving) return;
+									const dx = e.touches[0].clientX - startX;
+									const slideW = getSlideWidth();
+									// clamp translate so user cannot drag beyond first/last slide and reveal blank area
+									const minTranslate = -((slides.length - 1) * slideW);
+									const maxTranslate = 0;
+									let translate = -idx * slideW + dx;
+									if (translate > maxTranslate) translate = maxTranslate;
+									if (translate < minTranslate) translate = minTranslate;
+									track.style.transform = `translate3d(${ translate }px,0,0)`;
+								}, {passive:false});
+								track.addEventListener('touchend', e=>{
+									if (!moving) return;
+									moving = false;
+									const dx = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX - startX : 0;
+									const slideW = getSlideWidth();
+									const threshold = slideW / 6;
+									if (dx < -threshold && idx < slides.length-1) idx++;
+									else if (dx > threshold && idx > 0) idx--;
+									// clamp idx to valid range
+									idx = Math.max(0, Math.min(idx, Math.max(0, slides.length - 1)));
+									update();
+									setTimeout(()=>{ if (isMobile) startAutoplay(); }, 600);
+								});
 								// also pause autoplay when mouse enters and resume on leave (desktop hover)
 								carousel.addEventListener('mouseenter', stopAutoplay);
 								carousel.addEventListener('mouseleave', ()=>{ if (isMobile) startAutoplay(); });
