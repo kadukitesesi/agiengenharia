@@ -309,16 +309,10 @@
 						const isMobile = window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
 						let html = defaultPortfolioSlidesHTML;
 
-						if (isMobile) {
-							// on mobile always include both BR (default) and PT slides
-							html = [defaultPortfolioSlidesHTML, ptHTML].filter(Boolean).join('');
-							console.log('[portfolio] mobile combined slides length:', html.length);
-						} else {
-							// desktop: choose based on selected key
-							if (key === 'pt') html = ptHTML;
-							else html = defaultPortfolioSlidesHTML;
-							console.log('[portfolio] desktop/html length:', html.length, 'key:', key);
-						}
+						// Use same logic on mobile and desktop: show slides according to selected key
+						if (key === 'pt') html = ptHTML;
+						else html = defaultPortfolioSlidesHTML;
+						console.log('[portfolio] html length:', html.length, 'key:', key, 'isMobile:', !!isMobile);
 
 						// replace track contents
 						track.innerHTML = html;
@@ -376,7 +370,6 @@
 					const initialSelected = document.querySelector('.portfolio__btn--selected');
 					if (initialSelected) setPortfolioSlides(initialSelected.dataset.key || 'br');
 
-					// Contact form: validation + realtime formatting and mailto fallback
 					function initContactForm(){
 						const form = document.querySelector('.cta__form');
 						if (!form) return;
@@ -389,7 +382,10 @@
 							service: form.querySelector('select[name="service"]')
 						};
 
-						function ensureErrorEl(el){
+					// whether validation errors should be shown to the user
+					let showErrors = false;
+
+					function ensureErrorEl(el){
 							if (!el) return null;
 							let next = el.nextElementSibling;
 							if (!next || !next.classList.contains('field-error')){
@@ -419,17 +415,17 @@
 
 						function validateName(){
 							const v = (inp.name.value || '').trim();
-							if (!v){ setError(inp.name,'Nome é obrigatório'); return false; }
-							if (v.length < 2){ setError(inp.name,'Informe seu nome completo'); return false; }
-							clearError(inp.name); return true;
+							if (!v){ if (showErrors) setError(inp.name,'Nome é obrigatório'); return false; }
+							if (v.length < 2){ if (showErrors) setError(inp.name,'Informe seu nome completo'); return false; }
+							if (showErrors) clearError(inp.name); return true;
 						}
 
 						function validateEmail(){
 							const v = (inp.email.value || '').trim();
 							const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-							if (!v){ setError(inp.email,'E-mail é obrigatório'); return false; }
-							if (!re.test(v)){ setError(inp.email,'E-mail inválido'); return false; }
-							clearError(inp.email); return true;
+							if (!v){ if (showErrors) setError(inp.email,'E-mail é obrigatório'); return false; }
+							if (!re.test(v)){ if (showErrors) setError(inp.email,'E-mail inválido'); return false; }
+							if (showErrors) clearError(inp.email); return true;
 						}
 
 						function formatPhone(v){
@@ -443,25 +439,32 @@
 
 						function validatePhone(){
 							const digits = (inp.phone.value || '').replace(/\D/g,'');
-							if (!digits){ setError(inp.phone,'Telefone é obrigatório'); return false; }
-							if (digits.length < 10){ setError(inp.phone,'Telefone incompleto'); return false; }
-							clearError(inp.phone); return true;
+							if (!digits){ if (showErrors) setError(inp.phone,'Telefone é obrigatório'); return false; }
+							if (digits.length < 10){ if (showErrors) setError(inp.phone,'Telefone incompleto'); return false; }
+							if (showErrors) clearError(inp.phone); return true;
 						}
 
 						function validateService(){
 							if (!inp.service) return true; // optional if missing
-							if (!inp.service.value){ setError(inp.service,'Selecione um serviço'); return false; }
-							clearError(inp.service); return true;
+							if (!inp.service.value){ if (showErrors) setError(inp.service,'Selecione um serviço'); return false; }
+							if (showErrors) clearError(inp.service); return true;
 						}
 
 						function updateSubmitState(){
-							const ok = validateName() && validateEmail() && validatePhone() && validateService();
+							// do a silent validation to determine whether submit should be enabled
+							const ok = (function(){
+								// call validators but prevent them from showing errors by temporarily
+								// preserving showErrors state
+								const prev = showErrors; showErrors = false;
+								const res = validateName() && validateEmail() && validatePhone() && validateService();
+								showErrors = prev; return res;
+							})();
 							if (submitBtn) submitBtn.disabled = !ok;
 						}
 
 						// realtime listeners
-						if (inp.name) inp.name.addEventListener('input', ()=>{ inp.name.value = inp.name.value.replace(/\s{2,}/g,' '); validateName(); updateSubmitState(); });
-						if (inp.email) inp.email.addEventListener('input', ()=>{ inp.email.value = inp.email.value.toLowerCase(); validateEmail(); updateSubmitState(); });
+						if (inp.name) inp.name.addEventListener('input', ()=>{ inp.name.value = inp.name.value.replace(/\s{2,}/g,' '); if (showErrors) validateName(); updateSubmitState(); });
+						if (inp.email) inp.email.addEventListener('input', ()=>{ inp.email.value = inp.email.value.toLowerCase(); if (showErrors) validateEmail(); updateSubmitState(); });
 						if (inp.phone) inp.phone.addEventListener('input', (e)=>{
 							const el = inp.phone;
 							const raw = el.value || '';
@@ -480,19 +483,21 @@
 							}
 							if (pos < 0) pos = 0;
 							try { el.setSelectionRange(pos, pos); } catch(ex) {}
-							validatePhone(); updateSubmitState();
+							if (showErrors) validatePhone(); updateSubmitState();
 						});
-						if (inp.service) inp.service.addEventListener('change', ()=>{ validateService(); updateSubmitState(); });
+						if (inp.service) inp.service.addEventListener('change', ()=>{ if (showErrors) validateService(); updateSubmitState(); });
 
-						// blur validations
-						[inp.name, inp.email, inp.phone, inp.service].forEach(el=>{ if (!el) return; el.addEventListener('blur', ()=>{ if (el === inp.name) validateName(); if (el === inp.email) validateEmail(); if (el === inp.phone) validatePhone(); if (el === inp.service) validateService(); updateSubmitState(); }); });
+						// blur validations: only show errors after user attempted to submit
+						[inp.name, inp.email, inp.phone, inp.service].forEach(el=>{ if (!el) return; el.addEventListener('blur', ()=>{ if (showErrors){ if (el === inp.name) validateName(); if (el === inp.email) validateEmail(); if (el === inp.phone) validatePhone(); if (el === inp.service) validateService(); } updateSubmitState(); }); });
 
-						// initial state
+						// initial state: do not show errors yet, but set submit enabled/disabled
 						updateSubmitState();
 
 						// submit handler: validate and open mailto
 						form.addEventListener('submit', function(e){
 							e.preventDefault();
+							// enable showing errors from this point on
+							showErrors = true;
 							const ok = validateName() && validateEmail() && validatePhone() && validateService();
 							if (!ok){ const first = form.querySelector('[aria-invalid="true"]'); if (first) first.focus(); return; }
 							const fd = new FormData(form);
@@ -501,7 +506,7 @@
 							const phone = fd.get('phone') || '';
 							const company = fd.get('company') || '';
 							const service = fd.get('service') || '';
-							const to = 'kadukitesesi@gmail.com';
+							const to = 'contato@agiengenharia.com.br';
 							const subject = `Contato via site - ${name || 'Sem nome'}`;
 							const body = `Nome: ${name}\nEmail: ${email}\nTelefone: ${phone}\nEmpresa/Projeto: ${company}\nServiço: ${service}\n\nMensagem enviada via formulário do site.`;
 							const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 * {
     padding: 0;
@@ -529,10 +529,69 @@ body {
 
 /* Make header behave on narrow screens */
 @media (max-width: 768px) {
-  .portfolio__header { flex-direction: column; align-items: flex-start; gap: 12px; }
-  /* hide portfolio action buttons on mobile */
-  .portfolio__actions { display: none; }
+  /* keep title and actions on the same row in mobile */
+  .portfolio__header { flex-direction: row; align-items: center; gap: 12px; }
   .portfolio__btn__img { height: 26px; }
+
+  /* actions container: transparent background so it sits next to the title */
+  .portfolio__actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: auto;
+    padding: 0;
+    box-sizing: border-box;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    justify-content: flex-start;
+  }
+
+  /* base styles for buttons (mobile) */
+  .portfolio__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    font-size: 7px;
+    line-height: 1;
+    padding: 15px;
+    height: auto;
+    box-sizing: border-box;
+  }
+
+  /* country-only button (not selected) */
+  .portfolio__btn--country:not(.portfolio__btn--selected) {
+    width: 64px;
+    height: auto;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+
+  /* selected button style */
+  .portfolio__btn--selected {
+    display: flex;
+    width: 112px;
+    height: auto;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+    background: #124A61;
+    color: #ffffff;
+    border: none;
+  }
+
+  .portfolio__flag { width: 20px; height: auto; display:inline-block }
+  /* hide map on mobile to save space */
+  .sobre-nos__map { display: none; }
+  .sobre-nos__map-image { display: none; }
 }
 
 /* Expand mobile footer column layout up to 768px so it's fully centered in tablets/phones */
@@ -588,7 +647,7 @@ body {
 .partners__container {
   max-width: 1239px;
   margin: 0 auto;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .partners__heading {
@@ -603,16 +662,18 @@ body {
 }
 
 .partners__marquee {
-  width: 100%;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .partners__track {
   display: flex;
   gap: 48px;
   align-items: center;
-  /* slow continuous scroll - adjust duration to taste */
-  animation: partners-marquee 36s linear infinite;
+  /* slow continuous scroll - slightly faster */
+  animation: partners-marquee 30s linear infinite;
 }
 
 .partners__item img {
@@ -633,7 +694,7 @@ body {
 
 @media (max-width: 992px) {
   .partners__item img { height: 36px }
-  .partners__track { gap: 24px; animation-duration: 28s }
+  .partners__track { gap: 24px; animation-duration: 10s }
 }
 
 /* CTA section styles (from Figma node 108:897) */
@@ -1220,6 +1281,8 @@ body {
 
   /* Mobile portfolio slider styles (Figma mobile card layout) */
   .carousel { margin: 16px auto; }
+  /* reduce horizontal padding on portfolio section in mobile (20px -> 10px) */
+  .portfolio { padding: 40px 10px 10px; }
   /* keep visible rounded container and clip children */
   .carousel__stage { border-radius: 16px; overflow: hidden; }
   .carousel__track { gap: 12px; }
@@ -1244,8 +1307,9 @@ body {
   .carousel__slide {
     min-width: 0; /* allow custom width */
     flex: 0 0 auto;
-    width: calc(100vw - 32px); /* slightly reduced to leave space for gap and avoid neighbor peek */
-    height: 220px; /* mobile card height */
+    /* match .servicos__slide sizing on mobile for consistent card dimensions */
+    width: min(340px, calc(85vw - 24px));
+    height: 331px; /* same as .servicos__slide */
     border-radius: 10px;
     overflow: hidden;
     -webkit-mask-image: -webkit-radial-gradient(white, black);
@@ -1375,10 +1439,16 @@ body {
     line-height: normal !important;
     text-transform: uppercase;
     width: 294px;
-    margin: 0 0 16px 16px; /* left gutter so it's not flush to screen edge */
+    margin: 0 0 16px 16px;
     text-align: left;
     display: block;
   }
+}
+
+@media (max-width: 768px) {
+  .partners__item img { height: 22px; }
+  /* reduce partners section bottom padding on mobile from 66px to 20px */
+  .partners { padding: 18px 0 30px; }
 }
 
 @media (max-width: 768px) {
